@@ -40,8 +40,8 @@
 	</div>
 
 	<!-- Include router class (choose one) -->
-	<script src="/client/simple-hash-router.js"></script>
-	<!-- <script src="/client/simple-history-router.js"></script> -->
+	<!-- <script src="/client/simple-hash-router.js"></script> -->
+	<script src="/client/simple-history-router.js"></script>
 
 	<script>
 		// XSS protection function
@@ -114,8 +114,8 @@
 		};
 
 		// Instantiate router (choose one)
-		const router = new SimpleHashRouter({ routes, beforeEach });
-		// const router = new SimpleHistoryRouter({ routes, beforeEach });
+		// const router = new SimpleHashRouter({ routes, beforeEach });
+		const router = new SimpleHistoryRouter({ routes, beforeEach });
 	</script>
 </body>
 
