@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8" />
-	<title>SimpleRouter示例</title>
+	<title>SimpleRouter Demo</title>
 	<style>
 		.page {
 			display: none;
@@ -36,54 +36,54 @@
 <body>
 	<nav id="nav"></nav>
 	<div id="app">
-		<!-- 路由内容将动态渲染到这里 -->
+		<!-- Route content will be dynamically rendered here -->
 	</div>
 
-	<!-- 引入路由类（二选一） -->
-	<!-- <script src="simple-hash-router.js"></script> -->
-	<script src="simple-history-router.js"></script>
+	<!-- Include router class (choose one) -->
+	<script src="simple-hash-router.js"></script>
+	<!-- <script src="simple-history-router.js"></script> -->
 
 	<script>
-		// XSS防护函数
+		// XSS protection function
 		function escape(str) {
 			const div = document.createElement('div');
 			div.textContent = str;
 			return div.innerHTML;
 		}
 
-		// 路由配置
+		// Route configuration
 		const routes = [
 			{
 				path: "/",
-				name: "首页",
+				name: "Home",
 				component: () => `
               <div class="page active">
-                  <h1>首页</h1>
-                  <p>欢迎来到首页！</p>
-                  <button onclick="router.push('/user/123')">查看用户123</button>
-                  <button onclick="router.push('/test')">访问不存在的页面</button>
+                  <h1>Home</h1>
+                  <p>Welcome to the home page!</p>
+                  <button onclick="router.push('/user/123')">View User 123</button>
+                  <button onclick="router.push('/test')">Visit Non-existent Page</button>
               </div>
           `
 			},
 			{
 				path: "/about",
-				name: "关于我们",
+				name: "About",
 				component: () => `
               <div class="page active">
-                  <h1>关于我们</h1>
-                  <p>这是一个基于SimpleRouter的单页应用示例</p>
+                  <h1>About Us</h1>
+                  <p>This is a single page application demo based on SimpleRouter</p>
               </div>
           `
 			},
 			{
 				path: "/user/:id",
-				name: "用户详情",
+				name: "User Detail",
 				component: (params) => `
               <div class="page active">
-                  <h1>用户详情</h1>
-                  <p>用户ID: <strong>${escape(params.id)}</strong></p>
-                  <p>欢迎查看用户 ${escape(params.id)} 的详情！</p>
-                  <button onclick="router.push('/')">返回首页</button>
+                  <h1>User Detail</h1>
+                  <p>User ID: <strong>${escape(params.id)}</strong></p>
+                  <p>Welcome to view user ${escape(params.id)}'s details!</p>
+                  <button onclick="router.push('/')">Back to Home</button>
               </div>
           `
 			},
@@ -91,21 +91,21 @@
 				path: "*",
 				component: () => `
               <div class="page active">
-                  <h1>404 页面未找到</h1>
-                  <p>您访问的页面不存在！</p>
-                  <button onclick="router.push('/')">返回首页</button>
+                  <h1>404 Page Not Found</h1>
+                  <p>The page you are looking for does not exist!</p>
+                  <button onclick="router.push('/')">Back to Home</button>
               </div>
           `
 			}
 		];
 
-		// 路由守卫
+		// Route guard
 		const beforeEach = (to, from, next) => {
-			console.log("路由切换:", from ? from.path : "null", "→", to.path);
+			console.log("Route change:", from ? from.path : "null", "→", to.path);
 
-			// 模拟权限验证
+			// Simulate permission verification
 			if (to.path.startsWith("/user") && to.params.id !== "123") {
-				alert("您没有权限访问该用户！");
+				alert("You don't have permission to access this user!");
 				router.push("/");
 				return;
 			}
@@ -113,9 +113,9 @@
 			next();
 		};
 
-		// 实例化路由（二选一）
-		// const router = new SimpleHashRouter({ routes, beforeEach });
-		const router = new SimpleHistoryRouter({ routes, beforeEach });
+		// Instantiate router (choose one)
+		const router = new SimpleHashRouter({ routes, beforeEach });
+		// const router = new SimpleHistoryRouter({ routes, beforeEach });
 	</script>
 </body>
 

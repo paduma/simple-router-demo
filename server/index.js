@@ -43,6 +43,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`服务器运行在 http://localhost:${PORT}`);
-  console.log('支持 History 路由模式');
+  console.log(`Server running at http://localhost:${PORT}`);
+  console.log('History routing mode supported');
 });

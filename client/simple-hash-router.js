@@ -9,23 +9,23 @@ class SimpleHashRouter {
     this.init();
   }
 
-  // 初始化路由
+  // Initialize router
   init() {
-    // 监听hash变化
+    // Listen to hash change
     window.addEventListener('hashchange', this.handleHashChange.bind(this));
-    // 页面加载时初始化
+    // Initialize on page load
     window.addEventListener('load', this.handleHashChange.bind(this));
 
-    // 解析初始路由
+    // Parse initial route
     this.handleHashChange();
   }
 
-  // 处理hash变化
+  // Handle hash change
   handleHashChange() {
     const path = this.getPath();
     const route = this.matchRoute(path);
 
-    // 处理路由守卫
+    // Handle route guard
     if (this.beforeEach) {
       const next = () => {
         this.currentRoute = route;
@@ -41,35 +41,35 @@ class SimpleHashRouter {
     }
   }
 
-  // 获取当前路径
+  // Get current path
   getPath() {
     return window.location.hash.slice(1) || '/';
   }
 
-  // 匹配路由
+  // Match route
   matchRoute(path) {
     const pathSegments = path.split('/').filter(segment => segment);
     const routeParams = {};
 
-    // 首先尝试匹配普通路由
+    // Try to match normal routes first
     for (const route of this.routes) {
-      // 跳过404路由
+      // Skip 404 route
       if (route.path === '*') continue;
 
       const routeSegments = route.path
         .split('/')
         .filter(segment => segment);
 
-      // 如果路径段数量不匹配，跳过
+      // Skip if path segments length doesn't match
       if (pathSegments.length !== routeSegments.length) continue;
 
-      // 检查每个路径段是否匹配
+      // Check if each path segment matches
       let isMatch = true;
       for (let i = 0; i < routeSegments.length; i++) {
         const routeSegment = routeSegments[i];
         const pathSegment = pathSegments[i];
 
-        // 如果是动态路由参数
+        // If it's a dynamic route parameter
         if (routeSegment.startsWith(':')) {
           const paramName = routeSegment.slice(1);
           routeParams[paramName] = pathSegment;
@@ -84,27 +84,27 @@ class SimpleHashRouter {
       }
     }
 
-    // 如果没有匹配到普通路由，返回404路由
+    // If no normal route matched, return 404 route
     const notFoundRoute = this.routes.find(route => route.path === '*');
     if (notFoundRoute) {
       return { ...notFoundRoute, fullPath: path, params: {} };
     }
 
-    // 如果没有配置404路由，返回null
+    // If no 404 route configured, return null
     return null;
   }
 
-  // 渲染路由
+  // Render route
   renderRoute() {
     const app = document.getElementById('app');
     if (!this.currentRoute) {
-      app.innerHTML = '<h1>404 页面未找到</h1>';
+      app.innerHTML = '<h1>404 Page Not Found</h1>';
       return;
     }
     app.innerHTML = this.currentRoute.component(this.currentRoute.params || {});
   }
 
-  // 更新导航
+  // Update navigation
   updateNav() {
     const nav = document.getElementById('nav');
     nav.innerHTML = '';
@@ -128,7 +128,7 @@ class SimpleHashRouter {
     });
   }
 
-  // 导航到指定路由
+  // Navigate to specified route
   push(path) {
     window.location.hash = path;
   }

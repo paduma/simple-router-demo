@@ -1,171 +1,166 @@
-# SimpleRouter 示例
+# SimpleRouter Demo
+
+[中文](./README.zh-CN.md) | English
 
 > A simple demo explaining the difference between hash and history routing
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+[![CodeSandbox](https://img.shields.io/badge/CodeSandbox-Demo-blue)](https://codesandbox.io/p/sandbox/mvl33t)
 
-## 📖 简介
+## 📖 Introduction
 
-手写简单路由库，演示 Hash 路由和 History 路由的差异及后端配置需求。适合学习前端路由原理。
+A hand-written simple router library demonstrating the differences between Hash routing and History routing, along with backend configuration requirements. Perfect for learning frontend routing principles.
 
-## ✨ 特性
+## 🛠️ Tech Stack
 
-- ✅ 纯原生 JavaScript 实现
-- ✅ 支持动态路由参数（如 `/user/:id`）
-- ✅ 路由守卫（beforeEach）
-- ✅ 404 路由处理
-- ✅ 完整的前后端示例
-- ✅ Docker 一键部署
+### Frontend
+- **Vanilla JavaScript** - Pure JS, no framework dependencies
+- **HTML5 History API** - History routing implementation
+- **CSS3** - Styling and animations
 
-## 🚀 快速开始
+### Backend
+- **Node.js** - JavaScript runtime
+- **HTTP Module** - Native HTTP server
+- **Express** - (Optional) Web framework
 
-### 方式1：Node.js 服务器
+### Deployment
+- **Docker** - Containerized deployment
+- **Nginx** - Production web server
+- **Vercel/Netlify** - Serverless deployment platforms
+
+## ✨ Features
+
+- ✅ Pure vanilla JavaScript implementation
+- ✅ Support for dynamic route parameters (e.g., `/user/:id`)
+- ✅ Route guards (beforeEach)
+- ✅ 404 route handling
+- ✅ Complete frontend and backend examples
+- ✅ One-click Docker deployment
+
+## 🚀 Quick Start
+
+### Method 1: Online Demo
+
+**Live Demo:** [Coming soon - Deploy to Vercel]
+
+Try the frontend-only version: [CodeSandbox](https://codesandbox.io/p/sandbox/mvl33t)
+
+### Method 2: GitHub Codespaces
+
+1. Fork this repository
+2. Click "Code" → "Codespaces" → "Create codespace"
+3. Run `npm start`
+4. Make port 3000 public (PORTS tab → right-click → "Port Visibility" → "Public")
+5. Share the public URL
+
+**Perfect for History routing demo** - supports page refresh without 404 errors!
+
+### Method 3: Local Node.js Server
 
 ```bash
 npm start
-# 访问 http://localhost:3000
+# Visit http://localhost:3000
 ```
 
-### 方式2：Docker
+### Method 4: Docker
 
 ```bash
 docker-compose up -d
-# 访问 http://localhost:8080
+# Visit http://localhost:8080
 ```
 
-### 方式3：GitHub Codespaces
+## 🌐 Deploy Your Own
 
-1. Fork 本仓库
-2. 点击 "Code" → "Codespaces" → "Create codespace"
-3. 运行 `npm start`
+### Deploy to Vercel (Recommended)
 
-## 演示 Hash 路由和 History 路由的差异及后端配置。
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/simple-router-demo)
 
-## GitHub Codespaces 使用
+1. Click the button above
+2. Connect your GitHub account
+3. Deploy!
 
-1. 推送代码到GitHub仓库
-2. 点击仓库页面的 "Code" → "Codespaces" → "Create codespace"
-3. 等待环境启动（自动安装依赖）
-4. 运行命令：
+Vercel will automatically:
+- Serve static files from `client/`
+- Configure History routing (via `vercel.json`)
+- Provide a permanent public URL
 
-```bash
-# 方式1：Node.js服务器
-npm start
-# 访问端口3000
+## 📚 Hash vs History Routing
 
-# 方式2：Docker + Nginx
-docker-compose up -d
-# 访问端口8080
-```
+### Hash Routing
 
-Codespaces会自动转发端口，点击弹出的链接即可访问。
+No server configuration needed. Can be opened directly in browser.
 
-## 在线演示平台推荐
-
-### 1. StackBlitz（推荐）
-- 支持 Node.js 后端
-- 可以运行完整的前后端项目
-- URL: https://stackblitz.com
-- 支持 Vite、Node.js 等
-
-### 2. CodeSandbox
-- 支持容器模式（Container）可运行 Node.js
-- 创建时选择 "Node.js" 模板
-- URL: https://codesandbox.io
-
-### 3. Replit
-- 完整的 Linux 环境
-- 支持任意后端语言
-- URL: https://replit.com
-
-### 4. Glitch
-- 专注于 Node.js 应用
-- URL: https://glitch.com
-
-## 本地 Docker 部署
-
-### 快速启动
-
-```bash
-# 构建并启动
-docker-compose up -d
-
-# 访问
-http://localhost:8080
-
-# 停止
-docker-compose down
-```
-
-### 手动 Docker 命令
-
-```bash
-# 构建镜像
-docker build -t simple-router .
-
-# 运行容器
-docker run -d -p 8080:80 --name router-demo simple-router
-
-# 停止容器
-docker stop router-demo
-docker rm router-demo
-```
-
-## Hash 路由模式
-
-直接用浏览器打开 `index.html` 即可，无需服务器。
-
-修改 `index.html`：
+Modify `client/index.html`:
 ```javascript
 <script src="simple-hash-router.js"></script>
 const router = new SimpleHashRouter({ routes, beforeEach });
 ```
 
-URL 示例：`http://localhost:8080/#/about`
+URL example: `http://localhost:8080/#/about`
 
-## History 路由模式
+### History Routing
 
-需要服务器支持，所有路由都返回 `index.html`。
+Requires server support. All routes must return `index.html`.
 
-修改 `index.html`：
+Modify `client/index.html`:
 ```javascript
 <script src="simple-history-router.js"></script>
 const router = new SimpleHistoryRouter({ routes, beforeEach });
 ```
 
-URL 示例：`http://localhost:8080/about`
+URL example: `http://localhost:8080/about`
 
-### Node.js 服务器（无 Docker）
+## 🔄 Comparison
+
+| Feature | Hash Routing | History Routing |
+|---------|--------------|-----------------|
+| URL | `#/about` | `/about` |
+| Server Config | Not required | Required |
+| SEO | Poor | Better |
+| Compatibility | IE8+ | IE10+ |
+| Page Refresh | Works | Needs server config |
+
+## 🐳 Docker Deployment
 
 ```bash
-node server.js
-# 访问 http://localhost:3000
+# Build and start
+docker-compose up -d
+
+# Visit
+http://localhost:8080
+
+# Stop
+docker-compose down
 ```
 
-## 两种路由的区别
-
-| 特性 | Hash 路由 | History 路由 |
-|------|----------|-------------|
-| URL | `#/about` | `/about` |
-| 服务器配置 | 不需要 | 需要 |
-| SEO | 较差 | 较好 |
-| 兼容性 | IE8+ | IE10+ |
-| 刷新页面 | 正常 | 需要服务器配置 |
-
-## 项目结构
+## 📁 Project Structure
 
 ```
 router/
-├── client/                     # 前端代码
+├── client/                     # Frontend code
 │   ├── index.html
 │   ├── simple-hash-router.js
 │   └── simple-history-router.js
-├── server/                     # 后端代码
+├── server/                     # Backend code
 │   └── index.js
+├── .devcontainer/              # Codespaces config
+│   └── devcontainer.json
 ├── package.json
-├── nginx.conf                  # Nginx 配置
-├── Dockerfile                  # Docker 镜像配置
-├── docker-compose.yml          # Docker Compose 配置
+├── nginx.conf                  # Nginx configuration
+├── Dockerfile                  # Docker image config
+├── docker-compose.yml          # Docker Compose config
 └── README.md
 ```
+
+## 📝 License
+
+MIT License - see [LICENSE](LICENSE) file for details
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+## ⭐ Show your support
+
+Give a ⭐️ if this project helped you!
