@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  router-demo:
+    build: .
+    ports:
+      - "8080:80"
+    container_name: simple-router-demo

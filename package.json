@@ -1,0 +1,13 @@
+{
+  "name": "simple-router-demo",
+  "version": "1.0.0",
+  "description": "A simple demo explaining the difference between hash and history routing",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "keywords": ["router", "hash", "history", "spa", "frontend"],
+  "author": "",
+  "license": "MIT"
+}
